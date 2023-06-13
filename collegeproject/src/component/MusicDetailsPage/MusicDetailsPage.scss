@@ -1,0 +1,411 @@
+.MusicDetailsPage {
+  // filter: blur(10px);
+  .navbar {
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // font-size: 40px;
+    border: 2px solid wheat;
+  }
+  .musicRelatedContent {
+    display: flex;
+    column-gap: 39px;
+    // border: 2px solid;
+    .leftContent {
+      width: 70%;
+      //   border: 2px solid;
+      margin-left: 61px;
+      .title {
+        font-size: 33px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+      .img {
+        img {
+          width: 100%;
+        }
+      }
+      .eventInfo {
+        // border: 2px solid red;
+        display: flex;
+        justify-content: space-between;
+        margin-block: 21px;
+        .eventDate {
+          //   border: 2px solid;
+          display: flex;
+          align-items: center;
+          width: 32%;
+          background: #e7e7e7;
+          padding-inline: 5px;
+          padding-block: 5px;
+          column-gap: 15px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+          .icon {
+            // border: 2px solid;
+            font-size: 23px;
+            border-radius: 50px;
+            width: 42px;
+            height: 41px;
+            display: flex;
+            font-size: 24px;
+            align-items: center;
+            justify-content: center;
+            background: #ab0000;
+            color: whitesmoke;
+          }
+          .dateinfo {
+            p {
+              color: #717171;
+              text-transform: capitalize;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+        .eventTime {
+          //   border: 2px solid;
+          display: flex;
+          align-items: center;
+          width: 32%;
+          background: #e7e7e7;
+          padding-inline: 5px;
+          padding-block: 5px;
+          column-gap: 15px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+          .icon {
+            // border: 2px solid;
+            font-size: 23px;
+            border-radius: 50px;
+            width: 42px;
+            height: 41px;
+            display: flex;
+            font-size: 24px;
+            align-items: center;
+            justify-content: center;
+            background: #ab0000;
+            color: whitesmoke;
+          }
+          .timeInfo {
+            p {
+              color: #717171;
+              text-transform: capitalize;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+        .eventLocation {
+          //   border: 2px solid;
+          display: flex;
+          align-items: center;
+          width: 32%;
+          background: #e7e7e7;
+          padding-inline: 5px;
+          padding-block: 5px;
+          column-gap: 15px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+          .icon {
+            // border: 2px solid;
+            font-size: 23px;
+            border-radius: 50px;
+            width: 42px;
+            height: 41px;
+            display: flex;
+            font-size: 24px;
+            align-items: center;
+            justify-content: center;
+            background: #ab0000;
+            color: whitesmoke;
+          }
+          .locationInfo {
+            p {
+              color: #717171;
+              text-transform: capitalize;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+      .RegisterSection {
+        h2 {
+          margin-bottom: 19px;
+        }
+        .registerinfo {
+          display: flex;
+          justify-content: space-between;
+          column-gap: 1px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+          .TicketType {
+            // border: 2px solid;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+              rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            width: 34%;
+            .header {
+              border-bottom: 2px solid;
+              padding-block: 8px;
+              padding-left: 11px;
+              background: black;
+              color: #e7e7e7;
+              font-weight: 700;
+            }
+            .details {
+              padding-block: 13px;
+              padding-inline: 10px;
+              font-size: 25px;
+              font-weight: 600;
+            }
+          }
+          .TicketQty {
+            // border: 2px solid;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+              rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            width: 34%;
+            .header {
+              border-bottom: 2px solid;
+              padding-block: 8px;
+              padding-left: 11px;
+              text-align: center;
+              background: black;
+              color: #e7e7e7;
+              font-weight: 700;
+            }
+            .details {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 56%;
+              //   border: 2px solid;
+              .btn {
+                box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+                  rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+                display: flex;
+                width: 33%;
+                justify-content: space-between;
+
+                .minus {
+                  border-right: 2px solid #f6f2f2;
+                  width: 31px;
+                  display: flex;
+                  justify-content: center;
+                  background-color: #efecec;
+                }
+                .plus {
+                  border-left: 2px solid #f6f2f2;
+                  width: 31px;
+                  display: flex;
+                  justify-content: center;
+                  background-color: #efecec;
+                }
+              }
+            }
+          }
+          .TicketPrice {
+            // border: 2px solid;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+              rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            width: 34%;
+            .header {
+              text-align: center;
+              border-bottom: 2px solid;
+              padding-block: 8px;
+              padding-left: 11px;
+              background: black;
+              color: #e7e7e7;
+              font-weight: 700;
+            }
+            .details {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 56%;
+              font-size: 20px;
+              font-weight: 700;
+            }
+          }
+        }
+        .totalBill {
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+          padding-block: 19px;
+          background: #ececec;
+          display: flex;
+          justify-content: space-evenly;
+          margin-top: 29px;
+          .total {
+            font-size: 21px;
+            display: flex;
+            align-items: center;
+            column-gap: 6px;
+            font-weight: 600;
+            span {
+              display: flex;
+              align-items: center;
+              font-weight: 700;
+            }
+          }
+          .paybutton {
+            button {
+              padding-block: 8px;
+              padding-inline: 13px;
+              border-radius: 7px;
+              border: none;
+              outline: none;
+              background: #ab0000;
+              color: whitesmoke;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+    .rightContent {
+      // border: 2px solid;
+      margin-top: 50px;
+      width: 29%;
+      background: #e6e6e654;
+      height: 503px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .seatNumber {
+        border-bottom: 2px solid #e1e1e1;
+        text-align: center;
+        font-size: 21px;
+        padding-bottom: 24px;
+        text-transform: capitalize;
+        font-weight: 600;
+        span {
+          font-weight: 700;
+        }
+      }
+      .organizerDetails {
+        .title {
+          color: #ab0000;
+          font-size: 20px;
+          font-weight: 700;
+          text-transform: capitalize;
+          text-align: center;
+          padding-block: 25px;
+
+          span {
+            color: black;
+            padding-inline: 10px;
+          }
+        }
+        .place {
+          display: flex;
+          flex-direction: column;
+          row-gap: 30px;
+          border-bottom: 2px solid #e1e1e1;
+          font-size: 21px;
+          font-weight: 600;
+          padding-bottom: 18px;
+          padding-inline: 40px;
+
+          .first,
+          .second,
+          .third {
+            display: flex;
+            column-gap: 10px;
+            text-transform: capitalize;
+            .icon {
+              font-size: 26px;
+              color: #ab0000;
+            }
+          }
+        }
+        .schedule {
+          .showtime {
+            font-size: 21px;
+            font-weight: 600;
+            padding-bottom: 18px;
+            padding-inline: 40px;
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+            .icon {
+              font-size: 33px;
+              color: #ab0000;
+            }
+          }
+        }
+      }
+    }
+  }
+  .faq {
+    padding: 30px;
+
+    .title {
+      position: relative;
+      z-index: 5;
+      color: rgb(84 74 73);
+      font-family: "Roboto Slab", serif;
+      font-weight: 700;
+      padding-left: 30px;
+      font-size: 30px;
+      &::before {
+        content: "";
+        position: absolute;
+        border: 1px solid rgb(144, 49, 49);
+        position: absolute;
+        bottom: -10px;
+        left: 30px;
+        width: 113px;
+
+        bottom: -2px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgb(144, 49, 49);
+        position: absolute;
+        bottom: -5px;
+        left: 30px;
+        width: 89px;
+      }
+    }
+    .allFaq {
+      display: flex;
+      flex-direction: column;
+
+      margin-top: 30px;
+      .que_ans {
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+          rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        margin-bottom: 30px;
+        .que {
+          // border: 2px solid;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+        .ans {
+          display: none;
+        }
+        .ans-active {
+          text-align: center;
+          padding-bottom: 20px;
+          // margin-top: 10px;
+          display: block;
+          padding-inline: 10px;
+        }
+      }
+    }
+  }
+}
