@@ -1,12 +1,12 @@
-/*const pkg = require("pg");
+const pkg = require("pg");
 const { Client } = pkg;
 
 const db = new Client({
   host: "localhost",
   port: 5432,
-  database: "EventPlanner",
+  database: "Eventplanner",
   user: "postgres",
-  password: "12345",
+  password: "1234",
 });
 
 db.connect((err, client) => {
@@ -17,4 +17,4 @@ db.connect((err, client) => {
   console.log("Connected to PostgreSQL!");
 });
 
-module.exports = db;*/
+module.exports = db;
