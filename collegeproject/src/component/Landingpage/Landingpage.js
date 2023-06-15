@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
+
+//css pages
 import "../Landingpage/Landingpage.scss"
+import "../Register/Registerpage.scss"
+import "../LOGIN/Login.scss"
 // Import image
 import musicEvent from "../../Images/music-removebg-preview.png";
 import onlineEvent from "../../Images/online-event-removebg-preview.png"
@@ -31,12 +35,16 @@ import { Link } from 'react-router-dom';
 
 import Aos from "aos";
 import "aos/dist/aos.css"
-
+import Registerpage from '../Register/Registerpage';
+import Login from "../LOGIN/Login"
 function Landingpage() {
     const [toggelFirstQue, setToggelFirstQue] = useState(true)
     const [toggelSecondQue, setToggelSecondQue] = useState(true)
     const [toggelThirdQue, setToggelThirdQue] = useState(true)
     const [toggelFourthQue, setToggelFourthQue] = useState(true)
+    const [Registermodalonoff, setRegistermodalonoff] = useState(false);
+    const [Loginmodalonoff, setLoginmodalonoff] = useState(false);
+
     const handelTogggelFirst = () => {
         setToggelFirstQue(!toggelFirstQue);
         setToggelSecondQue(true);
@@ -68,7 +76,8 @@ function Landingpage() {
     }
 
 
-    const sectionRef = useRef();
+    const categoryRef = useRef();
+    const aboutref = useRef();
 
     useEffect(() => {
         Aos.init({ duration: 2000 });
@@ -78,7 +87,7 @@ function Landingpage() {
         <>
             <div className="landingPage">
 
-                <Navbar sectionRef={sectionRef} />
+                <Navbar setLoginmodalonoff={setLoginmodalonoff} setRegistermodalonoff={setRegistermodalonoff} categoryRef={categoryRef} aboutref={aboutref} />
                 <div className="banner">
                     {/* <img src={background} alt="" srcset="" /> */}
                     {/* <div className="para">
@@ -142,13 +151,18 @@ function Landingpage() {
                     </div>
                 </div>
                 <div className="aboutUs">
-                    <div className="left">
+                    <div className="left" ref={aboutref}>
                         <div className="firstImage">
                             <img src={aboutSectionImage} alt="" srcset="" />
                         </div>
-                        <div className="secondImage">
+
+                        <div className="secondImage" >
+
                             <img src={peoplepartying2} alt="" srcset="" />
                         </div>
+
+
+
                     </div>
                     <div className="right">
                         <div className="title">
@@ -202,8 +216,8 @@ function Landingpage() {
                         </div>
                     </div>
                 </div>
-                <div className="service">
-                    <div className="top">
+                <div className="service"  >
+                    <div className="top" ref={categoryRef}>
 
                         <div className="title">
                             Our Service
@@ -382,9 +396,16 @@ function Landingpage() {
 
                     </div>
                 </div>
+                <div className={Registermodalonoff ? "registerOn" : "registeroff"}>
+
+                    {Registermodalonoff && <Registerpage setRegistermodalonoff={setRegistermodalonoff} />}
+                </div>
+                <div className={Loginmodalonoff ? "loginOn" : "loginoff"}>
+
+                    {Loginmodalonoff && <Login setLoginmodalonoff={setLoginmodalonoff} />}
+                </div>
             </div>
 
-            iufgiuguiogpiugigiugiu
 
 
 

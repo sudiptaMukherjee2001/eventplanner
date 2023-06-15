@@ -8,6 +8,7 @@ import { AiFillCalendar } from "react-icons/ai";
 
 import { useDispatch } from "react-redux"
 import { eventdetails } from '../../feature/eventSlice';
+import Secondnavbar from "../nav/Secondnavbar"
 function MusicEventPage() {
 
     const dispatch = useDispatch();
@@ -23,10 +24,10 @@ function MusicEventPage() {
         <>
             <div className="musicEvent">
                 <div className="navbar">
-                    Music Event page
+                    <Secondnavbar />
                 </div>
                 <div className="categoryTitle">
-                    <h1> Music</h1>
+                    <h1>  Ignite Your Passion for Music</h1>
                 </div>
                 <div className="allMusicEventcards">
                     {

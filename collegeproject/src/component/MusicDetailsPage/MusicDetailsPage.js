@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlineStar } from "react-icons/ai";
 import { wishEvent } from "../../feature/eventSlice"
-
+import Secondnavbar from "../nav/Secondnavbar"
 import "../BookingForm/BookingForm.scss"
 function MusicDetailsPage() {
     const [toggelFirstQue, setToggelFirstQue] = useState(true)
@@ -23,11 +23,16 @@ function MusicDetailsPage() {
     const [toggelThirdQue, setToggelThirdQue] = useState(true)
     const [toggelFourthQue, setToggelFourthQue] = useState(true)
     const [BookingFormOpen, setBookingFormOpen] = useState(false)
+
     const navigate = useNavigate();
+
     const dispatch = useDispatch();
     const handelTogggelFirst = () => {
-        setToggelFirstQue(!toggelFirstQue);
 
+        setToggelFirstQue(!toggelFirstQue);
+        setToggelSecondQue(true);
+        setToggelThirdQue(true);
+        setToggelFourthQue(true)
 
     }
     const handelTogggelSecond = () => {
@@ -79,7 +84,7 @@ function MusicDetailsPage() {
     console.log(number)
 
     const { initialEvent, wishListEvent } = useSelector((state) => state.eventDetails);
-    const { id, title, timming, showTime, Location } = initialEvent[0];
+    const { id, title, timming, showTime, Location, price } = initialEvent[0];
     console.log("It is a title", title);
     console.log("It is a timming", timming);
     console.log("It is a showTime", showTime);
@@ -92,11 +97,24 @@ function MusicDetailsPage() {
         setBookingFormOpen(false)
     }
     const sendWishListEvent = (id) => {
-        const ListfavEvent = initialEvent.map(item => item)
-        console.log(wishListEvent);
+        console.log("clicked id", id)
+
+        console.log("initialevent", initialEvent)
+
+        const ListfavEvent = initialEvent.find(item => item.id === id)
+        console.log("List of  fav event", ListfavEvent)
+
+        // console.log("Wish list event comming from slice", wishListEvent);
+
         dispatch(wishEvent(ListfavEvent))
         // console.warn("WISHLIST EVENT ID", wishListEvent)
 
+    }
+
+
+
+    const handelGotopaymentpage = () => {
+        // navigate('/paymentpage')
     }
 
 
@@ -104,7 +122,7 @@ function MusicDetailsPage() {
         <>
             <div className="MusicDetailsPage">
                 <div className="navbar">
-                    MusicDetails Page
+                    <Secondnavbar />
                 </div>
                 <div className="musicRelatedContent">
                     {
@@ -322,8 +340,14 @@ function MusicDetailsPage() {
                                     Number of Guests:
                                     <input type="text" value={number} name="" id="" />
                                 </label>
+                                <label htmlFor="Location">
+                                    Amount:
+                                    <input type="text" value={`${price * number}.00`} name="" id="" />
+                                </label>
                             </div>
                             <div className="right">
+
+
 
                                 <label htmlFor="Location">
                                     Location:
@@ -345,7 +369,7 @@ function MusicDetailsPage() {
                             </div>
                         </div>
                         <div className="btn">
-                            <button>
+                            <button onClick={handelGotopaymentpage}>
                                 Book
                             </button>
                         </div>
@@ -353,18 +377,26 @@ function MusicDetailsPage() {
 
                     </div>
                 }
-                <div className="faq">
-                    <div className="title">
-                        FAQ
+                <div className="detailspagefaq">
+
+                    <div className="top">
+
+                        <div className="title">
+                            FAQ
+                        </div>
+                        <div className="header">
+                            Frequently Asked Questions about our Event Planner
+                        </div>
+
                     </div>
                     <div className="allFaq">
 
                         <div className="que_ans" onClick={handelTogggelFirst}>
-                            <div className="que">
-                                {toggelFirstQue ? <AiOutlinePlus className='plus' /> : <AiOutlineMinus />}
+                            <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
 
 
                                 What is the event planner web app?
+                                {toggelFirstQue ? <AiOutlinePlus className='Icon' /> : <AiOutlineMinus className='Icon' />}
                             </div>
                             <div className={toggelFirstQue ? "ans" : "ans-active"}>
                                 The event planner web app is an online platform that helps you plan and manage various types of events. It provides tools and features to streamline the event planning process and ensure a successful event.
@@ -372,9 +404,9 @@ function MusicDetailsPage() {
 
                         </div>
                         <div className="que_ans" onClick={handelTogggelSecond}>
-                            <div className="que">
-                                {toggelSecondQue ? <AiOutlinePlus className='plus' /> : <AiOutlineMinus />}
+                            <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
                                 How can I use the event planner web app?
+                                {toggelSecondQue ? <AiOutlinePlus className='Icon' /> : <AiOutlineMinus className='Icon' />}
                             </div>
                             <div className={toggelSecondQue ? "ans" : "ans-active"}>
                                 To use the event planner web app, you can simply visit our website and create an account. Once you're signed in, you can search an event and booked your event ..
@@ -382,21 +414,21 @@ function MusicDetailsPage() {
 
                         </div>
                         <div className="que_ans" onClick={handelTogggelThird}>
-                            <div className="que">
-                                {toggelThirdQue ? <AiOutlinePlus className='plus' /> : <AiOutlineMinus />}
+                            <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
                                 Can I customize event details and branding
+                                {toggelThirdQue ? <AiOutlinePlus className='Icon' /> : <AiOutlineMinus className='Icon' />}
                             </div>
-                            <div className={toggelThirdQue ? "ans" : "ans-active"}>
-                                No
+                            <div className={toggelThirdQue ? "ans" : "thirdfaq"}>
+                                Sorry,this facillity is not availabel right now..
                             </div>
 
                         </div>
                         <div className="que_ans" onClick={handelTogggelFourth}>
-                            <div className="que">
-                                {toggelFourthQue ? <AiOutlinePlus className='plus' /> : <AiOutlineMinus />}
+                            <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
 
 
                                 How can I get support if I encounter any issues?
+                                {toggelFourthQue ? <AiOutlinePlus className='Icon' /> : <AiOutlineMinus className='Icon' />}
                             </div>
                             <div className={toggelFourthQue ? "ans" : "ans-active"}>
                                 If you have any issues or need assistance, our customer support team is here to help. You can reach out to us through the contact form on our website or access our comprehensive knowledge base for self-help resources.

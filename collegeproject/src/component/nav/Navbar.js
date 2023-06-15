@@ -2,13 +2,25 @@ import React, { useEffect, useState } from 'react'
 import "../nav/Nav.scss"
 import logo from "../../Images/logo.png"
 import { Link, useNavigate } from 'react-router-dom';
-function Navbar({ sectionRef }) {
+function Navbar({ categoryRef, aboutref, setLoginmodalonoff, setRegistermodalonoff }) {
+
     const Navigate = useNavigate();
     const scrollToSection = () => {
-        sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+
+        categoryRef.current.parentNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
-    const handelLogin = () => {
-        Navigate("/login")
+
+    const scrollToabout = () => {
+        aboutref.current.parentNode.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+
+
+
+    const handelRegistermodalon = () => {
+        setRegistermodalonoff(true)
+    }
+    const handelLoginModalOn = () => {
+        setLoginmodalonoff(true)
     }
     return (
         <div className='nav'>
@@ -21,7 +33,7 @@ function Navbar({ sectionRef }) {
                 <li>
                     home
                 </li>
-                <li>
+                <li onClick={scrollToabout}>
                     About us
                 </li>
                 <li onClick={scrollToSection}>
@@ -30,8 +42,8 @@ function Navbar({ sectionRef }) {
 
                 </li>
             </ul>
-            <button className='loginBtn' onClick={handelLogin}>Login</button>
-            <button className='RegisterBtn'>Register</button>
+            <button className='loginBtn' onClick={handelLoginModalOn}>Login</button>
+            <button className='RegisterBtn' onClick={handelRegistermodalon}>Register</button>
         </div>
     )
 }
