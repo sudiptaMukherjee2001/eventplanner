@@ -1,7 +1,6 @@
 .nav {
-  // border: 2px solid;
-  background: rgb(41 40 40 / 56%);
-  border-bottom: 1px solid #fff;
+  background: rgb(251, 234, 253);
+  /* border-bottom: 1px solid #fff; */
   position: absolute;
   top: 0;
   left: 0;
@@ -9,28 +8,28 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  color: #ffedd5;
-  padding-inline: 13px;
-  padding-block: 11px;
+  align-items: center;
+  color: #755195;
+  padding-inline: 5px;
+  padding-block: 6px;
   .logo {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    // border: 2px solid;
-    font-size: 25px;
+    font-size: 20px;
+    font-weight: 800;
     column-gap: 14px;
+
     img {
-      width: 43px;
+      width: 34px;
     }
   }
   ul {
     display: flex;
-    // flex-direction: column;
     align-items: center;
     text-transform: capitalize;
-    width: 58%;
-    // border: 2px solid;
-    justify-content: center;
-    column-gap: 81px;
+    width: 64%;
+    justify-content: space-evenly;
 
     li {
       font-size: 25px;
@@ -49,12 +48,13 @@
   button {
     background-image: linear-gradient(210deg, #9733ee 0%, #da22ff 100%);
     border-radius: 6px 6px 6px 6px;
-    padding-inline: 39px;
+    padding-inline: 30px;
     border: none;
     outline: none;
     cursor: pointer;
     color: #fff;
-    font-size: 19px;
+    font-size: 18px;
+    height: 7vh;
   }
 }
 // box-shadow: 0px 50px 50px -15px rgba(129, 129, 129, 0.1);

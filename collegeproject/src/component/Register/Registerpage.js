@@ -1,9 +1,8 @@
 import React from 'react'
 import { RxCross2 } from "react-icons/rx";
-// import "../LOGIN/Login.scss"
-function Registerpage({ setLoginmodalonoff }) {
-    const handelLoginModaloff = () => {
-        setLoginmodalonoff(false)
+function Registerpage({ setRegistermodalonoff }) {
+    const handelRegisterModaloff = () => {
+        setRegistermodalonoff(false)
     }
     return (
         <>
@@ -13,28 +12,38 @@ function Registerpage({ setLoginmodalonoff }) {
                     <div className="title">
                         <h2>
 
-                            Login form
+                            Registration Form
                         </h2>
                     </div>
-                    <RxCross2 className='CrossIcon' onClick={handelLoginModaloff} />
+                    <RxCross2 className='CrossIcon' onClick={handelRegisterModaloff} />
 
                 </div>
 
-
+                <div className="username">
+                    <span>
+                        username:
+                    </span>
+                    <input type="text" />
+                </div>
                 <div className="username">
                     <span>
                         Email:
                     </span>
                     <input type="text" />
                 </div>
-
+                <div className="username">
+                    <span>
+                        Phone Number:
+                    </span>
+                    <input type="text" />
+                </div>
                 <div className="username">
                     <span>
                         password:
                     </span>
                     <input type="text" />
                 </div>
-                <div className="btn"><button>Log in</button></div>
+                <div className="btn"><button>Register</button></div>
             </div>
         </>
     )

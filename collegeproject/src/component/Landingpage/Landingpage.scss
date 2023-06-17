@@ -1,4 +1,5 @@
 .landingPage {
+  position: relative;
   .banner {
     position: relative;
     width: 100%;
@@ -736,6 +737,11 @@
         }
       }
     }
+  }
+  .register {
+    position: absolute;
+    top: 0;
+    z-index: 9;
   }
   // .content {
   //   .featureEvent {

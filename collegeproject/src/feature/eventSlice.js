@@ -5,8 +5,8 @@ export let eventSlice = createSlice({
     name: " eventDetails",
     initialState: {// this initialState/initialvalue is availabel in cartShow key on reducer
         initialEvent: [],
-        wishListEvent: {},
-        storeWishevent: []
+        wishListEvent: []
+
         // items: user
     },
     reducers: {
@@ -16,16 +16,33 @@ export let eventSlice = createSlice({
 
         },
         wishEvent: (state, action) => {
-            // state.wishListEvent = action.payload;
 
-            state.wishListEvent.splice(0, 10);
-
-
-            //store wish event
+            const id = state.wishListEvent.map(item => item.id);
+            const alreadyPresentEventIndex = id.findIndex(item => item === action.payload.id)
 
 
+            // Logic for checking  an event is present or not inside an wishListEvent arrar😁
+            if (alreadyPresentEventIndex !== -1) {
 
-            // console.log("state.wishListEvent id", state.storeWishevent);
+                state.wishListEvent.splice(alreadyPresentEventIndex, 1);
+                // console.log("event is present")
+            }
+            else {
+                state.wishListEvent.push(action.payload);
+
+            }
+
+
+
+            // console.log("action.payload", action.payload.id);
+            console.log("state.wishlistEevent", state.wishListEvent);
+
+            console.log("alreadyPresentEventIndex", alreadyPresentEventIndex);
+
+
+
+
+
 
 
         }
