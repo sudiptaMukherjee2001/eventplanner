@@ -48,7 +48,7 @@ function Admindashboard() {
         setLocation(eventLocation);
     };
 
-    const handlefileChange = (e) => {
+    const handleFileChange = (e) => {
         const eventFile = e.target.value;
         setFile(eventFile);
     };
@@ -166,7 +166,7 @@ function Admindashboard() {
                                 name=""
                                 id=""
                                 value={file}
-                                onChange={handlefileChange}
+                                onChange={handleFileChange}
                             />
                         </label>
                         <label htmlFor="">
