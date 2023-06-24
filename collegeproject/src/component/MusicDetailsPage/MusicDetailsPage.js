@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlineStar } from "react-icons/ai";
 import { wishEvent } from "../../feature/eventSlice"
-import Secondnavbar from "../nav/Secondnavbar"
+import Musicdetailspagenavbar from "../nav/Musicdetailspagenavbar"
 import "../BookingForm/BookingForm.scss"
 import { userDashboard } from "../../feature/Adminslice"
 
@@ -163,7 +163,7 @@ function MusicDetailsPage() {
         <>
             <div className="MusicDetailsPage">
                 <div className="navbar">
-                    <Secondnavbar />
+                    <Musicdetailspagenavbar />
                 </div>
                 <div className="musicRelatedContent">
                     {
