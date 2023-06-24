@@ -3,6 +3,7 @@ import eventSlice from "../feature/eventSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist"
 import { combineReducers } from "@reduxjs/toolkit"
+import Adminslice from "../feature/Adminslice";
 
 const persistConfig = {
     key: "root",
@@ -11,7 +12,8 @@ const persistConfig = {
 };
 
 const reducer = combineReducers({
-    eventDetails: eventSlice
+    eventDetails: eventSlice,
+    admin: Adminslice
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer)

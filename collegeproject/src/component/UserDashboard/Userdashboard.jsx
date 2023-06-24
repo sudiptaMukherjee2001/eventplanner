@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../UserDashboard/Userdashboard.scss"
 import { FaUserCircle } from "react-icons/fa";
 import user from "../../Images/user.png"
@@ -10,6 +10,64 @@ import { ImLocation } from "react-icons/im";
 import { AiFillCalendar } from "react-icons/ai";
 function Userdashboard() {
     const { wishListEvent } = useSelector((state) => state.eventDetails);
+
+    const { userDashboard } = useSelector((state) => state.admin);
+    const eventDates = userDashboard.map(item => item.date);
+
+    //const todaysDate = new Date().toLocaleDateString();
+
+    // const formattedEventDates = eventDates.map(date => new Date(date).toLocaleDateString());
+    // //const currentDate = formattedEventDates.filter(item => item === todaysDate);
+
+    // const futureDates = formattedEventDates.filter(date => new Date(date) >= new Date());
+    // const pastDates = formattedEventDates.filter(date => new Date(date) < new Date());
+
+    // //console.log("Current Date:", currentDate);
+    // console.log("Future Dates:", futureDates);
+    // console.log("Past Dates:", pastDates);
+
+
+    const currentDate = new Date().toLocaleDateString();
+
+    const formattedEventDates = eventDates.map(date => new Date(date).toLocaleDateString());
+    const filteredDates = formattedEventDates.filter(item => item === currentDate);
+    console.log("filteredDates", filteredDates)
+    const extractedValue = filteredDates[0];
+    console.log("extractedValue", extractedValue);
+
+
+    const ispast = currentDate > extractedValue;
+    console.log("ispast", ispast)
+    //present date
+    //const currentDate = new Date().toLocaleDateString();
+
+    /*const currarr = []
+    currarr.push(currentDate);
+    const [firstDateDestructured] = currarr;
+    const isCurrentDatePresent = eventDates.includes(firstDateDestructured);
+
+
+    const date=eventDates.filter(item=>item===currentDate)*/
+
+    console.log("userDashboard", userDashboard)
+
+    console.log("Event date", eventDates);
+
+    // console.log("current date", currentDate);
+
+    // console.log("current date array", currarr);
+
+    // console.log("firstDateDestructured", firstDateDestructured);
+
+    // console.log("filterdate", isCurrentDatePresent);
+
+
+
+
+
+
+
+
     return (
         <>
             <div className="userdashboard">
@@ -60,61 +118,7 @@ function Userdashboard() {
 
                     </div>
                 </div>
-                <div className="musicEvent">
-                    <div className="allMusicEventcards" >
-                        {
-                            wishListEvent.map((musicEvent, id) => {
-                                return (
-                                    <Link>
 
-                                        <div className="card">
-
-                                            <div className="imagesection">
-                                                <img src={musicEvent.img} alt="" srcset="" />
-                                                <div className="date">
-                                                    <ul>
-                                                        <li>{musicEvent.date}</li>
-                                                        <li>{musicEvent.mon}</li>
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-                                            <div className="title_Price">
-                                                <div className="title">
-
-                                                    {musicEvent.title}
-                                                </div>
-                                                <div className="price">
-                                                    <span>
-
-                                                        Price Starts from :<BsCurrencyRupee className='rsIcon' /> {musicEvent.price}
-                                                    </span>
-                                                </div>
-
-                                            </div>
-                                            <div className="location">
-                                                <ImLocation className='locationIcon' />
-                                                <span>
-
-                                                    Location : {musicEvent.Location}
-                                                </span>
-
-                                            </div>
-
-                                            <div className="timming">
-                                                <AiFillCalendar className='cal' />
-                                                <span>
-                                                    {musicEvent.timming}
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                    </Link>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
             </div>
         </>
     )

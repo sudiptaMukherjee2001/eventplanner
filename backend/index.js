@@ -4,6 +4,10 @@ const user = require("./routes/userAuthentication");
 const events = require("./routes/events");
 
 const app = express();
+
+app.use(express.static("uploads"));
+app.use("/uploads", express.static("./uploads"));
+
 app.use(express.json());
 app.use(cors());
 

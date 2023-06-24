@@ -253,7 +253,10 @@ function Landingpage() {
                                 ExhibitionsEvent
                             </div>
                             <div className="btn">
-                                View <BsFillArrowRightCircleFill className='serviceIcon' />
+                                <Link to="/ExhibitionPage">
+
+                                    View <BsFillArrowRightCircleFill className='serviceIcon' />
+                                </Link>
                             </div>
                         </div>
                         <div className="thirdService">

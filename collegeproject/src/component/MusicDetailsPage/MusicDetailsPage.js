@@ -1,6 +1,6 @@
 // Music Details page er design sob category er details page lagano hoyeche
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../MusicDetailsPage/MusicDetailsPage.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineCalendar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -17,6 +17,8 @@ import { AiOutlineStar } from "react-icons/ai";
 import { wishEvent } from "../../feature/eventSlice"
 import Secondnavbar from "../nav/Secondnavbar"
 import "../BookingForm/BookingForm.scss"
+import { userDashboard } from "../../feature/Adminslice"
+
 function MusicDetailsPage() {
     const [toggelFirstQue, setToggelFirstQue] = useState(true)
     const [toggelSecondQue, setToggelSecondQue] = useState(true)
@@ -27,6 +29,7 @@ function MusicDetailsPage() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+
     const handelTogggelFirst = () => {
 
         setToggelFirstQue(!toggelFirstQue);
@@ -81,43 +84,81 @@ function MusicDetailsPage() {
             setNumber(incrementNumber)
         }
     }
-    console.log(number)
+    // console.log(number)
 
     const { initialEvent, wishListEvent } = useSelector((state) => state.eventDetails);
-    const { id, title, timming, showTime, Location, price } = initialEvent[0];
-    console.log("It is a title", title);
-    console.log("It is a timming", timming);
-    console.log("It is a showTime", showTime);
-    console.log("It is a Location", Location);
 
+    const alldetails = initialEvent.map(item => item);
+
+    console.log("it it si title", alldetails[0]?.title)
+
+    // send booking details to  redux
+
+    const [state_variable_title, setTitle] = useState(alldetails[0]?.eventName);
+    const [state_variable_date, setDate] = useState(alldetails[0]?.date);
+    const [state_variable_Time, setTime] = useState(alldetails[0]?.time);
+    const [state_variable_price, setprice] = useState('');
+    const [state_variable_location, setlocation] = useState(alldetails[0]?.location);
+    const [state_variable_guest_num, setguestnum] = useState(number);
+    const [state_variable_Contact_name, setContactname] = useState('');
+    const [state_variable_email, setemail] = useState('');
+    const [state_variable_phoneNumber, setPhonenum] = useState('');
+
+    const [store, setStore] = useState()
+
+    const handelname = (e) => {
+        const username = e.target.value;
+        setContactname(username)
+    }
+
+    const handelEmail = (e) => {
+        const userEmail = e.target.value;
+        setemail(userEmail);
+    }
+
+    const handelPhnum = (e) => {
+        const userphonenum = e.target.value;
+        setPhonenum(userphonenum);
+    }
+
+
+    useEffect(() => {
+        const newEvent = {
+            eventName: state_variable_title,
+            date: state_variable_date,
+            time: state_variable_Time,
+            // price: state_variable_price,
+            location: state_variable_location,
+            Comtactname: state_variable_Contact_name,
+            email: state_variable_email,
+            phnum: state_variable_phoneNumber
+        };
+
+        setStore(newEvent)
+    }, [])
+
+
+    const handelStore = () => {
+
+
+
+        dispatch(userDashboard(store))
+
+    }
+
+    // ------------------------------------------
     const handelmodalon = () => {
         setBookingFormOpen(true)
     }
     const handelModalOff = () => {
         setBookingFormOpen(false)
     }
-    const sendWishListEvent = (id) => {
-        console.log("clicked id", id)
+    // const sendWishListEvent = (id) => {
 
-        console.log("initialevent", initialEvent)
+    //     const ListfavEvent = initialEvent.find(item => item?.id === id)
 
-        const ListfavEvent = initialEvent.find(item => item.id === id)
-        console.log("List of  fav event", ListfavEvent)
-
-        // console.log("Wish list event comming from slice", wishListEvent);
-
-        dispatch(wishEvent(ListfavEvent))
-        // console.warn("WISHLIST EVENT ID", wishListEvent)
-
-    }
-
-
-
-    const handelGotopaymentpage = () => {
-        // navigate('/paymentpage')
-    }
-
-
+    //     dispatch(wishEvent(ListfavEvent));
+    // }
     return (
         <>
             <div className="MusicDetailsPage">
@@ -130,10 +171,14 @@ function MusicDetailsPage() {
                             return (
                                 <div className="leftContent" key={id}>
                                     <div className="title">
-                                        {event.title}
+                                        {event.eventName}
                                     </div>
                                     <div className="img">
-                                        <img src={event?.img} alt="" srcset="" />
+                                        <img
+                                            src={`http://localhost:8800/${event.imageUrl}`}
+                                            alt=""
+                                            srcSet=""
+                                        />
                                     </div>
                                     <div className="eventInfo">
                                         <div className="eventDate">
@@ -146,7 +191,7 @@ function MusicDetailsPage() {
                                                 </h3>
                                                 <p>
 
-                                                    {event.timming}
+                                                    {event.date}
                                                 </p>
 
                                             </div>
@@ -162,7 +207,7 @@ function MusicDetailsPage() {
                                                 </h3>
                                                 <p>
 
-                                                    {event.showTime}
+                                                    {event.time}
                                                 </p>
                                             </div>
                                         </div>
@@ -176,7 +221,7 @@ function MusicDetailsPage() {
                                                 </h3>
                                                 <p>
 
-                                                    {event.Location}
+                                                    {event.location}
                                                 </p>
                                             </div>
                                         </div>
@@ -263,17 +308,17 @@ function MusicDetailsPage() {
                                         <div className="place">
                                             <div className="first">
                                                 <BsFillArrowRightCircleFill className='icon' />
-                                                {event.title}
+                                                {event.eventName}
                                             </div>
                                             <div className="second">
 
                                                 <BsFillArrowRightCircleFill className='icon' />
-                                                {event.Location}
+                                                {event.location}
 
                                             </div>
                                             <div className="third">
                                                 <BsFillArrowRightCircleFill className='icon' />
-                                                {event.timming}
+                                                {event.date}
                                             </div>
                                         </div>
                                     )
@@ -293,7 +338,7 @@ function MusicDetailsPage() {
                                         return (
                                             <div className="showtime">
                                                 <IoIosClock className='icon' />
-                                                {event.showTime}
+                                                {event.time}
 
                                             </div>
                                         )
@@ -303,14 +348,16 @@ function MusicDetailsPage() {
                             </div>
                         </div>
                         <div className="starIcon">
-                            <button onClick={() => sendWishListEvent(id)}>
+                            <button>
                                 add to cart
+
                             </button>
                         </div>
                     </div>
                 </div>
                 {
-                    BookingFormOpen && <div className='Bookingform'>
+                    BookingFormOpen &&
+                    <div className='Bookingform'>
 
                         <div className="header">
                             <div className="title">
@@ -326,15 +373,15 @@ function MusicDetailsPage() {
                                 <label htmlFor="eventName">
                                     Event Name:
 
-                                    <input type="text" value={title} name="" id="" />
+                                    <input type="text" value={state_variable_title} name="" id="" />
                                 </label>
                                 <label htmlFor="eventDate">
                                     Date:
-                                    <input type="text" value={timming} name="" id="" />
+                                    <input type="text" value={state_variable_date} name="" id="" />
                                 </label>
                                 <label htmlFor="eventTime">
                                     Time:
-                                    <input type="text" value={showTime} name="" id="" />
+                                    <input type="text" value={state_variable_Time} name="" id="" />
                                 </label>
                                 <label htmlFor="eventName">
                                     Number of Guests:
@@ -342,7 +389,7 @@ function MusicDetailsPage() {
                                 </label>
                                 <label htmlFor="Location">
                                     Amount:
-                                    <input type="text" value={`${price * number}.00`} name="" id="" />
+                                    <input type="text" value={`${alldetails[0]?.price * number}`} name="" id="" />
                                 </label>
                             </div>
                             <div className="right">
@@ -351,25 +398,25 @@ function MusicDetailsPage() {
 
                                 <label htmlFor="Location">
                                     Location:
-                                    <input type="text" value={Location} name="" id="" />
+                                    <input type="text" value={state_variable_location} name="" id="" />
                                 </label>
                                 <label htmlFor="userName">
                                     Contact name:
-                                    <input type="text" name="" id="" />
+                                    <input type="text" name="" id="" value={state_variable_Contact_name} onChange={handelname} />
                                 </label>
                                 <label htmlFor="email">
                                     Email:
-                                    <input type="email" name="" id="" />
+                                    <input type="email" name="" id="" value={state_variable_email} onChange={handelEmail} />
                                 </label>
                                 <label htmlFor="pno">
                                     Phone Number:
-                                    <input type="tel" name="" id="" />
+                                    <input type="tel" name="" id="" value={state_variable_phoneNumber} onChange={handelPhnum} />
 
                                 </label>
                             </div>
                         </div>
                         <div className="btn">
-                            <button onClick={handelGotopaymentpage}>
+                            <button onClick={handelStore} >
                                 Book
                             </button>
                         </div>

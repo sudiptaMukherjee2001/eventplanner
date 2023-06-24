@@ -1,7 +1,14 @@
 import React from 'react'
 import { RxCross2 } from "react-icons/rx";
+import { useDispatch } from 'react-redux';
+
+import { Login } from "../../feature/eventSlice"
 // import "../LOGIN/Login.scss"
 function Registerpage({ setLoginmodalonoff }) {
+    const dispatch = useDispatch();
+    const handelloginAuth = () => {
+        dispatch(Login(true))
+    }
     const handelLoginModaloff = () => {
         setLoginmodalonoff(false)
     }
@@ -34,7 +41,7 @@ function Registerpage({ setLoginmodalonoff }) {
                     </span>
                     <input type="text" />
                 </div>
-                <div className="btn"><button>Log in</button></div>
+                <div className="btn"><button onClick={handelloginAuth}>Log in</button></div>
             </div>
         </>
     )

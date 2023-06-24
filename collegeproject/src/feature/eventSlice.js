@@ -5,11 +5,17 @@ export let eventSlice = createSlice({
     name: " eventDetails",
     initialState: {// this initialState/initialvalue is availabel in cartShow key on reducer
         initialEvent: [],
-        wishListEvent: []
+        wishListEvent: [],
 
         // items: user
     },
     reducers: {
+        Login: {
+            isAuth: true
+        },
+        Logout: {
+            isAuth: false
+        },
         eventdetails: (state, action) => {
             state.initialEvent = action.payload;
 
@@ -51,5 +57,5 @@ export let eventSlice = createSlice({
 
 })
 
-export let { eventdetails, wishEvent } = eventSlice.actions;
+export let { eventdetails, wishEvent, Login, Logout } = eventSlice.actions;
 export default eventSlice.reducer;

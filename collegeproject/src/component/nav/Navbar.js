@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react'
 import "../nav/Nav.scss"
 import logo from "../../Images/logo.png"
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 function Navbar({ categoryRef, aboutref, setLoginmodalonoff, setRegistermodalonoff }) {
+
+
+
 
     const Navigate = useNavigate();
     const scrollToSection = () => {
 
-        categoryRef.current.parentNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        categoryRef?.current?.parentNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const scrollToabout = () => {
-        aboutref.current.parentNode.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        aboutref?.current?.parentNode?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
 
 
@@ -20,6 +24,7 @@ function Navbar({ categoryRef, aboutref, setLoginmodalonoff, setRegistermodalono
         setRegistermodalonoff(true)
     }
     const handelLoginModalOn = () => {
+
         setLoginmodalonoff(true)
     }
     return (

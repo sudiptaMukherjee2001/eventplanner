@@ -8,6 +8,7 @@ import { ImLocation } from "react-icons/im";
 import { AiFillCalendar } from "react-icons/ai";
 import { useDispatch } from "react-redux"
 import { eventdetails } from '../../feature/eventSlice';
+import Secondnavbar from "../nav/Secondnavbar"
 function ExhibitionEventPage() {
     const dispatch = useDispatch();
 
@@ -20,12 +21,10 @@ function ExhibitionEventPage() {
         <>
             <div className="exhibitionEvent">
                 <div className="navbar">
-                    Exhibition Event page
+                    <Secondnavbar />
                 </div>
                 <div className="categoryTitle">
-                    <div className="image">
-                        <img src={ExhibitionBackground} alt="" srcset="" />
-                    </div>
+
                     <h1> Exhibition</h1>
                 </div>
                 <div className="allExhibitionEventcards">

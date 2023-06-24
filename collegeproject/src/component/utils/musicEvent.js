@@ -10,7 +10,7 @@ export const musicEventDetails = [
         title: `Delhi Music Fest `,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023`,
+        timming: `6/23/2023`,
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     },
@@ -22,7 +22,7 @@ export const musicEventDetails = [
         title: `Mc stan show`,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023`,
+        timming: `6/22/2023`,
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     },
@@ -34,7 +34,7 @@ export const musicEventDetails = [
         title: `Mc stan show`,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023 `,
+        timming: `6/21/2023 `,
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     },
@@ -46,7 +46,7 @@ export const musicEventDetails = [
         title: `Mc stan show`,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023 `,
+        timming: `6/20/2023 `,
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     },
@@ -58,7 +58,7 @@ export const musicEventDetails = [
         title: `Mc stan show`,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023 `,
+        timming: `6/19/2023 `,
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     },
@@ -70,19 +70,19 @@ export const musicEventDetails = [
         title: `Mc stan show`,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023 `,
+        timming: "6 / 18 / 2023",
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     },
     {
         id: 6,
-        date: 31,
-        mon: `Aug`,
+        date: 17,
+        mon: `june`,
         img: delhiShow,
         title: ` arijit show`,
         price: 500,
         Location: "Mumbai",
-        timming: `june 31 2023 `,
+        timming: "6/17/2023",
         showTime: ` 7:00pm - 1:00pm`,
         type: "Music"
     }
