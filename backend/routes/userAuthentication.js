@@ -5,7 +5,7 @@ const db = require("../db/config.js");
 
 router.post("/reg", async (req, res) => {
   try {
-    const user_email = req.body.user_email;
+    const user_email = req.body.email;
     // Check if user exists
     const checkQuery = `SELECT * FROM public.users WHERE user_email=$1`;
     const checkResult = await db.query(checkQuery, [user_email]);
@@ -13,13 +13,13 @@ router.post("/reg", async (req, res) => {
       return res.status(409).json({ error: "user already exists." });
     }
     // Create new user account
-    const user_password = req.body.user_password;
+    const user_password = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(user_password, salt);
     const values = [
-      req.body.user_name,
+      req.body.name,
       user_email,
-      req.body.user_number,
+      req.body.number,
       hashedPassword,
     ];
     const query = `INSERT INTO public.users (user_name, user_email,user_number, user_password)
@@ -35,8 +35,9 @@ router.post("/reg", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const user_email = req.body.user_email;
-  const user_password = req.body.user_password;
+  const user_email = req.body.email;
+  const user_password = req.body.password;
+  console.log(user_email, user_password);
 
   try {
     const query = `
