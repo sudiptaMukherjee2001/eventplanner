@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db/config.js");
-import multer from "multer";
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
