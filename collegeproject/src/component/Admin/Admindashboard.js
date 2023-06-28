@@ -19,7 +19,10 @@ function Admindashboard() {
   const [seats, setSeats] = useState("");
   const [type, setType] = useState("");
 
-  const [storename, setStoreName] = useState([]);
+  const handlePriceChange = (e) => {
+    const eventPrice = e.target.value;
+    setPrice(eventPrice);
+  };
 
   const handleTitleChange = (e) => {
     const eventTitle = e.target.value;
@@ -36,17 +39,12 @@ function Admindashboard() {
     setTime(eventTime);
   };
 
-  const handlePriceChange = (e) => {
-    const eventPrice = e.target.value;
-    setPrice(eventPrice);
-  };
-
   const handleLocationChange = (e) => {
     const eventLocation = e.target.value;
     setLocation(eventLocation);
   };
 
-  const handleFileChange = (e) => {
+  const handlefileChange = (e) => {
     const eventFile = e.target.value;
     setFile(eventFile);
   };
@@ -58,6 +56,7 @@ function Admindashboard() {
 
   const handleStoreEventDetails = () => {
     const newEvent = {
+      userId: localStorage.getItem("userId"),
       eventname: title,
       location,
       date,
@@ -163,8 +162,8 @@ function Admindashboard() {
                 type="file"
                 name=""
                 id=""
-                value={pic}
-                onChange={handlePicChange}
+                value={file}
+                onChange={handlefileChange}
               />
             </label>
             <label htmlFor="">
