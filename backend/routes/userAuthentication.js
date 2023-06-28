@@ -16,12 +16,7 @@ router.post("/reg", async (req, res) => {
     const user_password = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(user_password, salt);
-    const values = [
-      req.body.name,
-      user_email,
-      req.body.number,
-      hashedPassword,
-    ];
+    const values = [req.body.name, user_email, req.body.number, hashedPassword];
     const query = `INSERT INTO public.users (user_name, user_email,user_number, user_password)
     VALUES ($1, $2, $3, $4)`;
     await db.query(query, values);
@@ -41,7 +36,7 @@ router.post("/login", async (req, res) => {
 
   try {
     const query = `
-        SELECT user_password, user_id
+        SELECT user_password, user_id,user_name,user_number
         FROM public.users
         WHERE user_email = $1
       `;
@@ -56,10 +51,13 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(user_password, storedPassword);
 
     if (isMatch) {
-      const ID = result.rows[0].user_id;
-      res
-        .status(200)
-        .json({ message: "User authentication successful", id: ID });
+      res.status(200).json({
+        message: "User authentication successful",
+        id: result.rows[0].user_id,
+        name: result.rows[0].user_name,
+        email: user_email,
+        number: result.rows[0].user_number,
+      });
     } else {
       res.status(401).json({ error: "Invalid user credentials" });
     }
