@@ -10,6 +10,7 @@ import axios from 'axios';
 import '../MusicEventPage/MusicEventPage.scss';
 import { musicEventDetails } from '../utils/musicEvent';
 import PropagateLoader from "react-spinners/PropagateLoader";
+import PageLoader from '../PageLoader/PageLoader';
 function MusicEventPage() {
     let [loading, setLoading] = useState(false);
     const [events, setEvents] = useState([])
@@ -50,12 +51,7 @@ function MusicEventPage() {
                 loading ?
                     <div className='loaderWrapper'>
 
-                        <PropagateLoader
-                            color="#da22ff"
-                            loading
-                            size={27}
-                            speedMultiplier={1.1}
-                        />
+                        <PageLoader />
                     </div>
                     :
                     <div className="musicEvent">
@@ -68,7 +64,8 @@ function MusicEventPage() {
                         <div className="allMusicEventcards">
                             {events.map((musicEvent, index) => {
                                 return (
-                                    <Link to={`/EventDetailsPage/${musicEvent.eventName}`} key={index}>
+                                    (musicEvent.approved && musicEvent.type === "music") &&
+                                    <Link to={`/EventDetailsPage/${musicEvent.eventname}`} key={index}>
                                         <div
                                             className="card"
                                             onClick={() => sendEventData(musicEvent.event_id)}
@@ -78,7 +75,10 @@ function MusicEventPage() {
                                                     src={`http://localhost:8800/${musicEvent.imageUrl}`}
                                                     alt=""
                                                     srcSet=""
+                                                    width=' 140'
+                                                    height='196 '
                                                 />
+
                                                 {/* <div className="date">
                                             <ul>
                                                 <li>{musicEvent.date}</li>
@@ -87,7 +87,7 @@ function MusicEventPage() {
                                         </div> */}
                                             </div>
                                             <div className="title_Price">
-                                                <div className="title">{musicEvent.eventName}</div>
+                                                <div className="title">{musicEvent.eventname}</div>
                                                 <div className="price">
                                                     <span>
                                                         Price Starts from :<BsCurrencyRupee className='rsIcon' /> {musicEvent.price}
@@ -109,7 +109,7 @@ function MusicEventPage() {
                                 );
                             })}
                         </div>
-                        <button >Add New Event</button>
+
                     </div>
             }
         </>

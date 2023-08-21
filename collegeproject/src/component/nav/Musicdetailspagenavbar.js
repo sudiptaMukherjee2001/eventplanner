@@ -6,7 +6,11 @@ import { BsBoxArrowInLeft } from "react-icons/bs";
 function Navbar({ categoryRef, aboutref }) {
     const navigate = useNavigate();
     const handelEventpage = () => {
-        navigate("/MusicEvents")
+        if (window.history.length > 2) {
+            navigate(-1);
+        } else {
+            navigate('/');
+        }
     }
 
     return (

@@ -1,88 +1,118 @@
-import React from 'react'
-import "../ExhibitionEventPage/ExhibitionEventPage.scss"
-import ExhibitionBackground from "../../Images/Exhibitionbackground.jpg"
-import { Link } from 'react-router-dom'
-import { ExhibitionEvent } from "../utils/exhibition"
-import { BsCurrencyRupee } from "react-icons/bs";
-import { ImLocation } from "react-icons/im";
-import { AiFillCalendar } from "react-icons/ai";
-import { useDispatch } from "react-redux"
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { eventdetails } from '../../feature/eventSlice';
-import Secondnavbar from "../nav/Secondnavbar"
+import Secondnavbar from '../nav/Secondnavbar';
+import { BsCurrencyRupee } from 'react-icons/bs';
+import { ImLocation } from 'react-icons/im';
+import { AiFillCalendar } from 'react-icons/ai';
+import axios from 'axios';
+import '../MusicEventPage/MusicEventPage.scss';
+import { musicEventDetails } from '../utils/musicEvent';
+import PropagateLoader from "react-spinners/PropagateLoader";
+import PageLoader from '../PageLoader/PageLoader';
 function ExhibitionEventPage() {
+    let [loading, setLoading] = useState(false);
+    const [events, setEvents] = useState([])
     const dispatch = useDispatch();
 
-    const sendEventData = (id) => {
-        const selectedShow = ExhibitionEvent.filter((event) => event.id === id)
+    //loader
 
-        dispatch(eventdetails(selectedShow))
-    }
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false);
+            //data fetch from database
+            const fetchData = async () => {
+                try {
+                    const response = await axios.get('http://localhost:8800/events');
+                    console.log(response.data); // Log the fetched data to the console
+
+                    setEvents(response.data);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            };
+
+            fetchData();
+        }, 2000)
+
+    }, []);
+    //send perticular choosed event to my redux
+    const sendEventData = (eventid) => {
+        const selectedShow = events.filter((event, index) => event.event_id === eventid);
+        dispatch(eventdetails(selectedShow));
+    };
+
+
     return (
         <>
-            <div className="exhibitionEvent">
-                <div className="navbar">
-                    <Secondnavbar />
-                </div>
-                <div className="categoryTitle">
+            {
+                loading ?
+                    <div className='loaderWrapper'>
 
-                    <h1> Exhibition</h1>
-                </div>
-                <div className="allExhibitionEventcards">
-                    {
-                        ExhibitionEvent.map((musicEvent, id) => {
-                            return (
-                                <Link to={`/EventDetailsPage/${musicEvent.title}`}>
-
-                                    <div className="card" key={id} onClick={() => sendEventData(id)}>
-
-                                        <div className="imagesection">
-                                            <img src={musicEvent.img} alt="" srcset="" />
-                                            <div className="date">
-                                                <ul>
-                                                    <li>{musicEvent.date}</li>
-                                                    <li>{musicEvent.mon}</li>
-                                                </ul>
+                        <PageLoader />
+                    </div>
+                    :
+                    <div className="musicEvent">
+                        <div className="navbar">
+                            <Secondnavbar />
+                        </div>
+                        <div className="categoryTitle">
+                            <h1 style={{ fontSize: "21px", left: "271px", top: "25px", width: "57%", textAlign: "center" }}>Explore a world of creativity and innovation at our captivating exhibition event.</h1>
+                        </div>
+                        <div className="allMusicEventcards">
+                            {events.map((musicEvent, index) => {
+                                return (
+                                    (musicEvent.approved && musicEvent.type === "exhibition") &&
+                                    <Link to={`/EventDetailsPage/${musicEvent.eventname}`} key={index}>
+                                        <div
+                                            className="card"
+                                            onClick={() => sendEventData(musicEvent.event_id)}
+                                        >
+                                            <div className="imagesection">
+                                                <img
+                                                    src={`http://localhost:8800/${musicEvent.imageUrl}`}
+                                                    alt=""
+                                                    srcSet=""
+                                                    width=' 140'
+                                                    height='196 '
+                                                />
+                                                {/* <div className="date">
+                                            <ul>
+                                                <li>{musicEvent.date}</li>
+                                                <li>{musicEvent.mon}</li>
+                                            </ul>
+                                        </div> */}
                                             </div>
-
-                                        </div>
-                                        <div className="title_Price">
-                                            <div className="title">
-
-                                                {musicEvent.title}
+                                            <div className="title_Price">
+                                                <div className="title">{musicEvent.eventname}</div>
+                                                <div className="price">
+                                                    <span>
+                                                        Price Starts from :<BsCurrencyRupee className='rsIcon' /> {musicEvent.price}
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div className="price">
+                                            <div className="location">
+                                                <ImLocation className='locationIcon' />
                                                 <span>
-
-                                                    Price Starts from :<BsCurrencyRupee className='rsIcon' /> {musicEvent.price}
+                                                    Location: {musicEvent.location}
                                                 </span>
                                             </div>
+                                            <div className="timming">
+                                                <AiFillCalendar className='cal' />
+                                                <span>{musicEvent.time}</span>
+                                            </div>
                                         </div>
-                                        <div className="location">
-                                            <ImLocation className='locationIcon' />
-                                            <span>
+                                    </Link>
+                                );
+                            })}
+                        </div>
 
-                                                Location : {musicEvent.Location}
-                                            </span>
-
-                                        </div>
-
-                                        <div className="timming">
-                                            <AiFillCalendar className='cal' />
-                                            <span>
-                                                {musicEvent.timming}
-                                            </span>
-                                        </div>
-
-                                    </div>
-                                </Link>
-                            )
-                        })
-                    }
-                </div>
-
-            </div>
+                    </div>
+            }
         </>
-    )
+    );
 }
 
-export default ExhibitionEventPage
+export default ExhibitionEventPage;

@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db/config.js");
-const multer = require("multer")
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    //console.log(file);
+    console.log(file);
     cb(null, file.originalname);
   },
 });
@@ -17,11 +17,10 @@ const upload = multer({ storage: storage });
 
 router.get("/", async (req, res) => {
   try {
-    console.log("getttt")
     const query = `SELECT * FROM public.events`;
     const data = await db.query(query);
     const result = data.rows;
-    return res.send(result).status(200)
+    return res.send(result).status(200);
   } catch (error) {
     res.status(500).json({ error: error });
   }
@@ -30,18 +29,18 @@ router.get("/", async (req, res) => {
 router.post("/add", upload.single("file"), async (req, res) => {
   try {
     const values = [
-      req.body.user_id,
-      req.body.eventName,
+      req.body.userId,
+      req.body.eventname,
       req.body.location,
       req.body.date,
       req.body.time,
       req.body.price,
+      req.body.type,
       req.body.seats,
       req.file.path,
-      req.body.type,
+      0,
     ];
-    const query = `INSERT INTO public.events (user_id, "eventName", location, date, time, price, seats, "imageUrl", type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
-    //const query = `INSERT INTO public.events (user_id,eventName,location,date,time,price,seats,imageUrl,type)VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
+    const query = `INSERT INTO public.events (user_id,eventname,location,date,"time",price,type,seats,"imageUrl",approved)VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`;
     await db.query(query, values);
     res.status(200).json({ message: "Succesfully added new event." });
   } catch (error) {

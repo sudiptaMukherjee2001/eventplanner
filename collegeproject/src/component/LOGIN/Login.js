@@ -4,21 +4,67 @@ import { useDispatch } from 'react-redux';
 import { Login } from "../../feature/eventSlice";
 import axios from 'axios';
 // import "../LOGIN/Login.scss"
-function Registerpage({ setLoginmodalonoff }) {
+
+import { useNavigate } from "react-router-dom"
+
+// toast
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
+// It is login page
+function Registerpage({ setisLoggedIn, setLoginmodalonoff }) {
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handelloginAuth = () => {
-        axios.post('http://localhost:8800/user/login', { email, password })
-            .then(response => {
-                localStorage.setItem("userId", response.ID)
+
+        axios
+            .post("http://localhost:8800/user/login", { email, password })
+            .then((res) => {
+                localStorage.setItem("userId", res.data.id);
+                localStorage.setItem("userName", res.data.name);
+                localStorage.setItem("userEmail", res.data.email);
+                localStorage.setItem("userNumber", res.data.number);
                 // Handle successful authentication here
                 //dispatch(Login(true));
+                toast.success(" Login Successfull ", {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                console.log("succ")
+                navigate("/");
+                setLoginmodalonoff(false)
+
+
             })
-            .catch(error => {
+            .catch((error) => {
                 // Handle authentication error here
                 console.log(error);
+                toast.error(" Invalid credentials ", {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                })
             });
+
+
+
+
+
     };
 
     const handelLoginModaloff = () => {
@@ -32,8 +78,15 @@ function Registerpage({ setLoginmodalonoff }) {
     const handelpasswordChange = (e) => {
         setPassword(e.target.value);
     }
+
+
+
+
+
+
     return (
         <>
+
             <div className="registerCard">
 
                 <div className="header">
@@ -52,16 +105,17 @@ function Registerpage({ setLoginmodalonoff }) {
                     <span>
                         Email:
                     </span>
-                    <input type="text" value={email} onChange={handelemailchange} />
+                    <input type="email" value={email} onChange={handelemailchange} />
                 </div>
 
                 <div className="username">
                     <span>
                         password:
                     </span>
-                    <input type="text " value={password} onChange={handelpasswordChange} />
+                    <input type="password " value={password} onChange={handelpasswordChange} />
                 </div>
-                <div className="btn"><button onClick={handelloginAuth}>Log in</button></div>
+                <div className="btn" ><button onClick={handelloginAuth}  >Log in</button></div>
+
             </div>
         </>
     )

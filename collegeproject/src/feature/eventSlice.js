@@ -6,6 +6,7 @@ export let eventSlice = createSlice({
     initialState: {// this initialState/initialvalue is availabel in cartShow key on reducer
         initialEvent: [],
         wishListEvent: [],
+        numberOfGuest: 0
 
         // items: user
     },
@@ -20,6 +21,9 @@ export let eventSlice = createSlice({
             state.initialEvent = action.payload;
 
 
+        },
+        bookedGuest: (state, action) => {
+            state.numberOfGuest = action.payload
         },
         wishEvent: (state, action) => {
 
@@ -57,5 +61,5 @@ export let eventSlice = createSlice({
 
 })
 
-export let { eventdetails, wishEvent, Login, Logout } = eventSlice.actions;
+export let { eventdetails, wishEvent, Login, Logout, bookedGuest } = eventSlice.actions;
 export default eventSlice.reducer;

@@ -3,6 +3,7 @@ import "../nav/Nav.scss"
 import logo from "../../Images/logo.png"
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 function Navbar({ categoryRef, aboutref, setLoginmodalonoff, setRegistermodalonoff }) {
 
 
@@ -27,6 +28,17 @@ function Navbar({ categoryRef, aboutref, setLoginmodalonoff, setRegistermodalono
 
         setLoginmodalonoff(true)
     }
+    const handelLogOutModal = () => {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('userName')
+        localStorage.removeItem('userEmail')
+        localStorage.removeItem('userNumber')
+
+        window.location.reload();
+
+    }
+
+    const id = localStorage.getItem('userId')
     return (
         <div className='nav'>
             <div className="logo">
@@ -47,8 +59,16 @@ function Navbar({ categoryRef, aboutref, setLoginmodalonoff, setRegistermodalono
 
                 </li>
             </ul>
-            <button className='loginBtn' onClick={handelLoginModalOn}>Login</button>
-            <button className='RegisterBtn' onClick={handelRegistermodalon}>Register</button>
+            {
+                id > 0 ? <button className='loginBtn' onClick={handelLogOutModal}>Logout</button>
+                    :
+                    <>
+
+                        <button className='loginBtn' onClick={handelLoginModalOn}>Login</button>
+                        <button className='RegisterBtn' onClick={handelRegistermodalon}>Register</button>
+                    </>
+            }
+
         </div>
     )
 }

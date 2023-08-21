@@ -14,6 +14,9 @@ function Footer() {
     const handelNavigateToCreatepage = () => {
         navigate("/CreateEvent")
     }
+    const gotoAdminLogin = () => {
+        navigate("/adminLogin")
+    }
     return (
         <>
             <div className="footerCon">
@@ -87,6 +90,7 @@ function Footer() {
                         </ul>
                     </div>
                     <div className="fourthBox">
+                        <button className='create' onClick={gotoAdminLogin}>Administrator Login</button>
                         <button className="create" onClick={handelNavigateToCreatepage}>Create Event</button>
                         <ul>
                             <li><FaFacebookMessenger /></li>
@@ -94,6 +98,7 @@ function Footer() {
                             <li><AiFillInstagram /></li>
                             <li><IoLogoYoutube /></li>
                         </ul>
+
                     </div>
                 </div>
             </div>

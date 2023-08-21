@@ -1,12 +1,17 @@
 
+// Create event page
 
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import axios from "axios";
 
 import "../../component/Admin/Admin.scss";
 
 import { eventCreate } from "../../feature/Adminslice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Admindashboard() {
     const dispatch = useDispatch();
@@ -17,12 +22,13 @@ function Admindashboard() {
     const [price, setPrice] = useState("");
     const [location, setLocation] = useState("");
     const [time, setTime] = useState("");
-    const [file, setFile] = useState("");
+    // const [file, setFile] = useState("");
+    const [productImage, setProductImage] = useState(null);
     const [seats, setSeats] = useState("");
     const [type, setType] = useState("");
 
     const [storename, setStoreName] = useState([]);
-
+    const navigate = useNavigate();
     const handleTitleChange = (e) => {
         const eventTitle = e.target.value;
         setTitle(eventTitle);
@@ -49,8 +55,7 @@ function Admindashboard() {
     };
 
     const handlefileChange = (e) => {
-        const eventFile = e.target.value;
-        setFile(eventFile);
+        setProductImage(e.target.files[0]);
     };
 
     const handleTypeChange = (e) => {
@@ -59,24 +64,35 @@ function Admindashboard() {
     };
 
     const handleStoreEventDetails = () => {
-        const newEvent = {
-            eventname: title,
-            location,
-            date,
-            file,
-            time,
-            price,
-            seats,
-            type,
-        };
 
-        setStoreName(newEvent);
+        let formData = new FormData();
+        formData.append("userId", localStorage.getItem("userId"));
+        formData.append("eventname", title);
+        formData.append("location", location);
+        formData.append("date", date);
+        formData.append("file", productImage);
+        formData.append("time", time);
+        formData.append("price", price);
+        formData.append("seats", seats);
+        formData.append("type", type);
+
         axios
-            .post("http://localhost:8800/events/add", newEvent)
+            .post("http://localhost:8800/events/add", formData)
             .then((response) => {
                 // Handle success
                 console.log("Event created successfully:", response.data);
                 dispatch(eventCreate(storename));
+                toast.success("Event submitted for approval. We'll notify you soon.", {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                navigate("/");
             })
             .catch((error) => {
                 // Handle error
@@ -147,6 +163,7 @@ function Admindashboard() {
                                 id=""
                                 value={price}
                                 onChange={handlePriceChange}
+                                style={{ marginLeft: "30px" }}
                             />
                         </label>
                         <label htmlFor="Location">
@@ -163,9 +180,10 @@ function Admindashboard() {
                             Image:
                             <input
                                 type="file"
+                                multiple
                                 name=""
                                 id=""
-                                value={file}
+                                // value={file}
                                 onChange={handlefileChange}
                             />
                         </label>
@@ -173,9 +191,10 @@ function Admindashboard() {
                             Event Type:
                             <select value={type} onChange={handleTypeChange}>
                                 <option value="">Select Your Event</option>
-                                <option value="Music">Music</option>
-                                <option value="Exhibition">Exhibition</option>
-                                <option value="Party">Party</option>
+                                <option value="music">Music</option>
+                                <option value="exhibition">Exhibition</option>
+                                <option value="party">Party</option>
+                                <option value="Online Event">Online Event</option>
                             </select>
                         </label>
                     </div>

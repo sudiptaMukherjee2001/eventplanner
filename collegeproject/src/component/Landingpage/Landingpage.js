@@ -27,6 +27,7 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
+
 //Import utils
 import { upcommingEvents } from "../utils/Upcommingevent";
 
@@ -38,6 +39,7 @@ import "aos/dist/aos.css"
 import Registerpage from '../Register/Registerpage';
 import Login from "../LOGIN/Login"
 import Footer from '../../Footer/Footer';
+import PageLoader from '../PageLoader/PageLoader';
 function Landingpage() {
     const [toggelFirstQue, setToggelFirstQue] = useState(true)
     const [toggelSecondQue, setToggelSecondQue] = useState(true)
@@ -94,9 +96,9 @@ function Landingpage() {
     const categoryRef = useRef();
     const aboutref = useRef();
 
-    useEffect(() => {
-        Aos.init({ duration: 2000 });
-    }, []);
+    // useEffect(() => {
+    //     Aos.init({ duration: 1000 });
+    // }, []);
 
     return (
         <>
@@ -106,12 +108,13 @@ function Landingpage() {
                 loading ?
                     <div className='loaderWrapper'>
 
-                        <PropagateLoader
+                        {/* <PropagateLoader
                             color="#da22ff"
                             loading
                             size={27}
                             speedMultiplier={1.1}
-                        />
+                        /> */}
+                        <PageLoader />
                     </div>
                     :
                     <div className="landingPage">
@@ -286,7 +289,10 @@ function Landingpage() {
                                         OnlineEvent
                                     </div>
                                     <div className="btn">
-                                        View <BsFillArrowRightCircleFill className='serviceIcon' />
+                                        <Link to="/OnlineEventPage">
+
+                                            View <BsFillArrowRightCircleFill className='serviceIcon' />
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="fourthService">
@@ -297,7 +303,10 @@ function Landingpage() {
                                         PartyEvent
                                     </div>
                                     <div className="btn">
-                                        View <BsFillArrowRightCircleFill className='serviceIcon' />
+                                        <Link to="/PartyEventpage">
+
+                                            View <BsFillArrowRightCircleFill className='serviceIcon' />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -339,7 +348,7 @@ function Landingpage() {
                                                     </div>
                                                     <div className="timming">
                                                         <span>
-                                                            Timming:
+                                                            Date:
                                                         </span>
                                                         {item.timming}
                                                     </div>
@@ -357,11 +366,11 @@ function Landingpage() {
                                 }
                             </div>
                         </div>
-                        <div className="faq">
+                        <div className="detailspagefaq" style={{ alignItems: "center" }}>
 
-                            <div className="top">
+                            <div className="top" style={{ alignItems: "center" }}>
 
-                                <div className="title">
+                                <div className="title" >
                                     FAQ
                                 </div>
                                 <div className="header">
@@ -369,9 +378,9 @@ function Landingpage() {
                                 </div>
 
                             </div>
-                            <div className="allFaq">
+                            <div className="allFaq" style={{ alignItems: "center" }}>
 
-                                <div className="que_ans" onClick={handelTogggelFirst}>
+                                <div className="que_ans" style={{ alignItems: "center" }} onClick={handelTogggelFirst}>
                                     <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
 
 
@@ -383,7 +392,7 @@ function Landingpage() {
                                     </div>
 
                                 </div>
-                                <div className="que_ans" onClick={handelTogggelSecond}>
+                                <div className="que_ans" style={{ alignItems: "center" }} onClick={handelTogggelSecond}>
                                     <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
                                         How can I use the event planner web app?
                                         {toggelSecondQue ? <AiOutlinePlus className='Icon' /> : <AiOutlineMinus className='Icon' />}
@@ -393,7 +402,7 @@ function Landingpage() {
                                     </div>
 
                                 </div>
-                                <div className="que_ans" onClick={handelTogggelThird}>
+                                <div className="que_ans" style={{ alignItems: "center" }} onClick={handelTogggelThird}>
                                     <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
                                         Can I customize event details and branding
                                         {toggelThirdQue ? <AiOutlinePlus className='Icon' /> : <AiOutlineMinus className='Icon' />}
@@ -403,7 +412,7 @@ function Landingpage() {
                                     </div>
 
                                 </div>
-                                <div className="que_ans" onClick={handelTogggelFourth}>
+                                <div className="que_ans" style={{ alignItems: "center" }} onClick={handelTogggelFourth}>
                                     <div className={toggelFirstQue ? "queModalOff" : "queModalOn"}>
 
 
