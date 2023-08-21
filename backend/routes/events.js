@@ -31,16 +31,17 @@ router.post("/add", upload.single("file"), async (req, res) => {
     const values = [
       req.body.userId,
       req.body.eventname,
+      req.body.eventName,
       req.body.location,
       req.body.date,
       req.body.time,
       req.body.price,
       req.body.type,
       req.body.seats,
+      req.body.type,
       req.file.path,
-      0,
     ];
-    const query = `INSERT INTO public.events (user_id,eventname,location,date,"time",price,type,seats,"imageUrl",approved)VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`;
+    const query = `INSERT INTO public.events (user_id,name,location,date,time,price,type,seats,imageUrl)VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
     await db.query(query, values);
     res.status(200).json({ message: "Succesfully added new event." });
   } catch (error) {
