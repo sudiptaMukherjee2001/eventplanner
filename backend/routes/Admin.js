@@ -9,9 +9,9 @@ router.patch("/:event_id", async (req, res) => {
         const query = `UPDATE public.events SET approved = $1 WHERE event_id = $2`;
         await db.query(query, values);
         return res.status(200);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error });
+    } catch (er) {
+        console.log(er);
+        res.status(500).json({ er: er });
     }
 });
 
