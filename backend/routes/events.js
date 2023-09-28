@@ -44,9 +44,9 @@ router.post("/add", upload.single("file"), async (req, res) => {
     const query = `INSERT INTO public.events (user_id,name,location,date,time,price,type,seats,imageUrl)VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
     await db.query(query, values);
     res.status(200).json({ message: "Succesfully added new event." });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error });
+  } catch (er) {
+    console.log(er);
+    res.status(500).json({ er: er });
   }
 });
 
