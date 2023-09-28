@@ -16,7 +16,7 @@ function Registerpage({ setisLoggedIn, setLoginmodalonoff }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handelloginAuth = () => {
