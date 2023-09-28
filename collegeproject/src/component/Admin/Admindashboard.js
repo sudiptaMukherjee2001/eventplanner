@@ -2,7 +2,7 @@
 // Create event page
 
 import React, { forwardRef, useState } from "react";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import axios from "axios";
 
 import "../../component/Admin/Admin.scss";
@@ -26,7 +26,7 @@ function Admindashboard() {
   const [file, setFile] = useState("");
   const [seats, setSeats] = useState("");
   const [type, setType] = useState("");
-
+  const [storename, setStoreName] = useState()
   const handlePriceChange = (e) => {
     const eventPrice = e.target.value;
     setPrice(eventPrice);
